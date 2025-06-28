@@ -5,7 +5,6 @@ public class Room {
     private RoomType type;
     private int pricePerNight;
 
-    // Constructeur
     public Room(int roomNumber, RoomType type, int pricePerNight) {
     if (roomNumber <= 0) {
     throw new IllegalArgumentException("Room number must be greater than zero.");
@@ -23,7 +22,6 @@ if (pricePerNight < 0) {
         this.pricePerNight = pricePerNight;
     }
 
-    // Getters
     public int getRoomNumber() {
         return roomNumber;
     }

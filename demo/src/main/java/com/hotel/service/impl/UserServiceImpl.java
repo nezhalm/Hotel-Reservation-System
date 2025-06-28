@@ -35,7 +35,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<User> getAllUsers() {
-        return new ArrayList<>(users); // returns a copy
+        return new ArrayList<>(users);
     }
 
     @Override
@@ -53,7 +53,6 @@ public void printAllUsers() {
     try {
         System.out.println("\n=== USERS ===");
 
-        // Copier et trier la liste par ID décroissant
         List<User> sortedUsers = new ArrayList<>(users);
         sortedUsers.sort((u1, u2) -> Integer.compare(u2.getUserId(), u1.getUserId()));
 

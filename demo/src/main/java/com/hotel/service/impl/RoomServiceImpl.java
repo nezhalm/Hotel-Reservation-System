@@ -11,7 +11,6 @@ public class RoomServiceImpl implements IRoomService {
 
     private final List<Room> rooms;
 
-    // No-argument constructor
     public RoomServiceImpl() {
         this.rooms = new ArrayList<>();
     }

@@ -43,14 +43,12 @@ if (selectedRoom == null) throw new Exception("Room not found.");
 
 if (selectedUser == null) throw new Exception("User not found.");
 
-        // Vérifier disponibilité
         for (Booking booking : bookings) {
             if (booking.getRoom().getRoomNumber() == roomNumber && booking.isOverlapping(checkIn, checkOut)) {
 throw new Exception("The room is already booked for this period.");
             }
         }
 
-        // Calcul du coût
         long days = (checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24);
 
         if (days <= 0) days = 1; 
@@ -60,7 +58,6 @@ throw new Exception("The room is already booked for this period.");
 throw new Exception("Insufficient balance. Total price = " + totalCost);
         }
 
-        // Débit et réservation
         selectedUser.debit((int) totalCost);
         Booking newBooking = new Booking(selectedUser, selectedRoom, checkIn, checkOut, (int) totalCost);
         bookings.add(0, newBooking);
@@ -75,9 +72,8 @@ System.out.println("Booking successful for user " + userId);
 public void printAll() {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-    // ====== ROOMS ======
     List<Room> rooms = iRoomService.getAllRooms();
-    rooms.sort((r1, r2) -> Integer.compare(r2.getRoomNumber(), r1.getRoomNumber())); // Tri par ID d�croissant
+    rooms.sort((r1, r2) -> Integer.compare(r2.getRoomNumber(), r1.getRoomNumber())); 
 
     System.out.println("\n===== ROOMS =====");
     if (rooms.isEmpty()) {
@@ -91,12 +87,11 @@ public void printAll() {
         }
     }
 
-    // ====== BOOKINGS ======
     List<Booking> sortedBookings = new ArrayList<>(bookings);
     sortedBookings.sort((b1, b2) -> Integer.compare(
         b2.getRoom().getRoomNumber(),
         b1.getRoom().getRoomNumber()
-    )); // Tri par ID de chambre d�croissant
+    ));
 
     System.out.println("\n===== CURRENT BOOKINGS =====");
     if (sortedBookings.isEmpty()) {
