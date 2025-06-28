@@ -23,10 +23,10 @@ Display all users (from latest to oldest).
 
 
 # Bonus Questions :
-# 1/ Suppose we put all the functions inside the same service. Is this the recommended approach ? Please explain.
+## 1/ Suppose we put all the functions inside the same service. Is this the recommended approach ? Please explain.
 -No, putting all functions inside the same service is not recommended. It violates the Single Responsibility Principle, which states that a class or service should have only one reason to change. Separating functions into dedicated services (e.g., RoomService, UserService, BookingService) improves code maintainability, readability, and testability. It also allows each service to focus on a specific domain, making the system easier to scale and modify.
 
-# 2/- In this design, we chose to have a function setRoom(..) that should not impact the previous bookings. What is another way ? What is your
-# recommendation ? Please explain and justify.
+## 2/- In this design, we chose to have a function setRoom(..) that should not impact the previous bookings. What is another way ? What is your
+## recommendation ? Please explain and justify.
 -In this design, setRoom() does not impact previous bookings to preserve historical accuracy and data integrity. Another way to handle this would be to implement versioning for rooms—each update to a room would create a new version, while existing bookings would reference the room version at booking time. This approach maintains immutability of past bookings while allowing room updates.
 However, my recommendation is to use snapshots within the booking itself (storing room details like type and price at booking time). This method is simpler, reduces complexity, and ensures bookings remain consistent regardless of later changes to rooms. It also facilitates straightforward auditing and reporting, making it a best practice for systems requiring reliable historical data.
