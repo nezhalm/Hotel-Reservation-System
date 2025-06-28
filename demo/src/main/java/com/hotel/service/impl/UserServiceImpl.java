@@ -49,16 +49,21 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void printAllUsers() {
+public void printAllUsers() {
+    try {
+        System.out.println("\n=== USERS ===");
 
-        try {
-            System.out.println("\n=== USERS ===");
-            for (User user : users) {
-                System.out.println("User " + user.getUserId() +
-                        " | Balance: " + user.getBalance());
-            }
-        } catch (Exception e) {
-            System.err.println("Error in printAllUsers: " + e.getMessage());
+        // Copier et trier la liste par ID décroissant
+        List<User> sortedUsers = new ArrayList<>(users);
+        sortedUsers.sort((u1, u2) -> Integer.compare(u2.getUserId(), u1.getUserId()));
+
+        for (User user : sortedUsers) {
+            System.out.println("User " + user.getUserId() +
+                    " | Balance: " + user.getBalance() + " MAD");
         }
+    } catch (Exception e) {
+        System.err.println("Error in printAllUsers: " + e.getMessage());
     }
+}
+
 }

@@ -71,30 +71,53 @@ System.out.println("Booking successful for user " + userId);
     public List<Booking> getAllBookings() {
         return new ArrayList<>(bookings);
     }
-   @Override
+@Override
 public void printAll() {
-  System.out.println("\n===== CURRENT BOOKINGS =====");
-
-if (bookings.isEmpty()) {
-    System.out.println("No bookings found.");
-    return;
-}
-
-
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-for (Booking booking : bookings) {
-    System.out.println(" Booking:");
-    System.out.println(" - Room number: " + booking.getRoom().getRoomNumber());
-    System.out.println("   Type: " + booking.getRoom().getType());
-    System.out.println("   Price/Night: " + booking.getRoom().getPricePerNight() + " MAD");
-    System.out.println(" - User ID: " + booking.getUserSnapshot().getUserId());
-    System.out.println("   Balance after booking: " + booking.getUserSnapshot().getBalance() + " MAD");
-    System.out.println(" - From " + sdf.format(booking.getCheckIn()) + " to " + sdf.format(booking.getCheckOut()));
-    System.out.println(" - Total amount: " + booking.getTotalPrice() + " MAD");
-    System.out.println("-------------------------------------------------");
+
+    // ====== ROOMS ======
+    List<Room> rooms = iRoomService.getAllRooms();
+    rooms.sort((r1, r2) -> Integer.compare(r2.getRoomNumber(), r1.getRoomNumber())); // Tri par ID décroissant
+
+    System.out.println("\n===== ROOMS =====");
+    if (rooms.isEmpty()) {
+        System.out.println("No rooms found.");
+    } else {
+        for (Room room : rooms) {
+            System.out.println(" Room Number: " + room.getRoomNumber());
+            System.out.println(" Type: " + room.getType());
+            System.out.println(" Price/Night: " + room.getPricePerNight() + " MAD");
+            System.out.println("-------------------------------------------------");
+        }
+    }
+
+    // ====== BOOKINGS ======
+    List<Booking> sortedBookings = new ArrayList<>(bookings);
+    sortedBookings.sort((b1, b2) -> Integer.compare(
+        b2.getRoom().getRoomNumber(),
+        b1.getRoom().getRoomNumber()
+    )); // Tri par ID de chambre décroissant
+
+    System.out.println("\n===== CURRENT BOOKINGS =====");
+    if (sortedBookings.isEmpty()) {
+        System.out.println("No bookings found.");
+    } else {
+        for (Booking booking : sortedBookings) {
+            System.out.println(" Booking:");
+            System.out.println(" - Room number: " + booking.getRoom().getRoomNumber());
+            System.out.println("   Type: " + booking.getRoom().getType());
+            System.out.println("   Price/Night: " + booking.getRoom().getPricePerNight() + " MAD");
+            System.out.println(" - User ID: " + booking.getUserSnapshot().getUserId());
+            System.out.println("   Balance after booking: " + booking.getUserSnapshot().getBalance() + " MAD");
+            System.out.println(" - From " + sdf.format(booking.getCheckIn()) + " to " + sdf.format(booking.getCheckOut()));
+            System.out.println(" - Total amount: " + booking.getTotalPrice() + " MAD");
+            System.out.println("-------------------------------------------------");
+        }
+    }
 }
 
-}
+
+
 
 
 }

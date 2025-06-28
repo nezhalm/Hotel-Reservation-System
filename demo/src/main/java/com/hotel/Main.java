@@ -30,10 +30,10 @@ public class Main {
 
 
         // Bookings
-         bookingService.bookRoom(1, 2, sdf.parse("30/06/2026"), sdf.parse("07/07/2026")); // fail (5000 < 14000)
-         bookingService.bookRoom(1, 2, sdf.parse("07/07/2026"), sdf.parse("30/06/2026")); // invalid dates
+        // bookingService.bookRoom(1, 2, sdf.parse("30/06/2026"), sdf.parse("07/07/2026")); // fail (5000 < 14000)
+        // bookingService.bookRoom(1, 2, sdf.parse("07/07/2026"), sdf.parse("30/06/2026")); // invalid dates
          bookingService.bookRoom(1, 1, sdf.parse("07/07/2026"), sdf.parse("08/07/2026")); // success
-         bookingService.bookRoom(2, 1, sdf.parse("07/07/2026"), sdf.parse("09/07/2026")); // overlap fail
+        // bookingService.bookRoom(2, 1, sdf.parse("07/07/2026"), sdf.parse("09/07/2026")); // overlap fail
          bookingService.bookRoom(2, 3, sdf.parse("07/07/2026"), sdf.parse("08/07/2026")); // success
 
         // Modify room (should not affect bookings)
