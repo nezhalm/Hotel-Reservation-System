@@ -15,7 +15,7 @@ Display all rooms and bookings (from latest to oldest).
 
 Display all users (from latest to oldest).
 
-# Result de printAll() et printAllUsers() :
+# Result of printAll() and printAllUsers() :
 
 ![image](https://github.com/user-attachments/assets/c7c4f7ed-6fc0-4db8-b883-dac9be65b0f8)
 
